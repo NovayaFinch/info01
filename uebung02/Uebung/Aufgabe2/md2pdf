@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# input: Markdowm + AsciiMath
+# output: html + pdf
+
+usage_exit() {
+    echo "USAGE: ${0} <input-file> [headline]" >&2 
+    exit 0
+}
+
+txt=$1
+
+if [ -z "${txt}" ]
+then
+    usage_exit
+fi
+
+if [ ! -r "${txt}" ]
+then
+    echo "ERROR: input file \"${txt}\" not found" >&2 
+    usage_exit
+fi
+
+name=`echo "${txt}" | cut -d'.' -f1` 
+html="${name}.html"
+pdf="${name}.pdf"
+if [ -z "$2" ]
+then
+   headline="$(date) Markdown/AsciiMath to HTML/PDF (by pandoc/wkhtmltopdf)"
+else
+   headline=$2
+fi
+
+echo "INFO: write file \"${html}\"" >&2
+
+cat <<EOF > ${html}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>${headline}</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  asciimath2jax: {
+    delimiters: [['\`','\`'], ['$','$']]
+  }
+});
+</script>
+</head>
+<body class="markdown-body">
+EOF
+
+echo "${headline}" | pandoc --from markdown --to html5 >> ${html}
+pandoc --from markdown --to html5 --asciimath ${txt} >> ${html}
+
+cat <<EOF >> ${html}
+</body>
+</html>
+EOF
+
+if [ -n "$DISPLAY" ]
+then
+   echo "INFO: write file \"${pdf}\"" >&2 
+   wkhtmltopdf --enable-javascript --javascript-delay 3000 -L 2cm -R 2cm -T 2cm -B 2cm ${html} ${pdf}
+else
+   echo "INFO: write file \"${pdf}\"" >&2
+   xvfb-run -- wkhtmltopdf --enable-javascript --javascript-delay 3000 -L 2cm -R 2cm -T 2cm -B 2cm ${html} ${pdf}
+fi

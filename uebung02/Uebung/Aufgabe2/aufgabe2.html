@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Fr 8. Nov 14:12:10 CET 2019 Markdown/AsciiMath to HTML/PDF (by pandoc/wkhtmltopdf)</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  asciimath2jax: {
+    delimiters: [['`','`'], ['$','$']]
+  }
+});
+</script>
+</head>
+<body class="markdown-body">
+<p>Fr 8. Nov 14:12:10 CET 2019 Markdown/AsciiMath to HTML/PDF (by pandoc/wkhtmltopdf)</p>
+<h1 id="informatik-i-übung-02-aufgabe-2">Informatik I, Übung 02, Aufgabe 2</h1>
+<p>Markdown und AsciiMath</p>
+<h2 id="größter-gemeinsamer-teiler-ggt">Größter gemeinsamer Teiler (ggT)</h2>
+<h3 id="das-ggt-problem">Das ggT-Problem</h3>
+<p><strong>Gegeben.</strong> Zwei positive ganze Zahlen <span class="LaTeX">$a, b in ZZ gt 0$</span></p>
+<p><strong>Gesucht.</strong> Eine positive ganze Zahl <span class="LaTeX">$d in ZZ$</span> mit <span class="LaTeX">$d gt 0$</span> und folgender Eigenschaften.</p>
+<ul>
+<li><span class="LaTeX">$d$</span> teilt <span class="LaTeX">$a$</span> und <span class="LaTeX">$b$</span> ohne Rest</li>
+<li>es gibt keine ganze Zahl <span class="LaTeX">$d&#39; in ZZ$</span> mit <span class="LaTeX">$d&#39; gt d$</span>,die <span class="LaTeX">$a$</span> und <span class="LaTeX">$b$</span> ohne Rest teilt.</li>
+</ul>
+<h3 id="der-euklidischer-algorithmus-klassisch">Der Euklidischer Algorithmus (klassisch)</h3>
+<p><strong>Eingabe.</strong> zwei ganze Zahlen <span class="LaTeX">$a,b$</span> mit <span class="LaTeX">$a gt b ge 0$</span></p>
+<p><strong>Initialisierung.</strong> <span class="LaTeX">$x leftarrow a, y leftarrow b$</span></p>
+<p><strong>Iteration.</strong> wiederhole das Folgende solange <span class="LaTeX">$y ne 0$</span> gilt</p>
+<ul>
+<li>falls <span class="LaTeX">$(x gt y)$</span> dann <span class="LaTeX">$x leftarrow x - y$</span></li>
+<li>sonst <span class="LaTeX">$x leftarrow y - x$</span></li>
+</ul>
+<p><strong>Abschluss.</strong> <span class="LaTeX">$d leftarrow x$</span></p>
+<p><strong>Rückgabe.</strong> <span class="LaTeX">$d$</span></p>
+<p><em>Hinweis.</em> <span class="LaTeX">$A leftarrow B$</span> steht für: speichere aktuellen Wert von <span class="LaTeX">$B$</span> in <span class="LaTeX">$A$</span>.</p>
+<h3 id="euklidischer-algorithmus-in-java">Euklidischer Algorithmus in Java</h3>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">// Euklidischer Algorithmus (klassisch)</span>
+<span class="co">// Eingabe von a und b</span>
+<span class="co">// Initialisierung</span>
+<span class="dt">int</span> x = a;
+<span class="dt">int</span> y = b;
+<span class="co">// Iteration</span>
+<span class="kw">while</span> (y != <span class="dv">0</span>) {    <span class="co">// ’!=’ steht fuer ’ungleich’</span>
+    <span class="kw">if</span> (x &gt; y)
+        x = x - y;
+    <span class="kw">else</span>
+        y = y - x;
+}
+<span class="co">// Abschluss</span>
+<span class="dt">int</span> d = x
+<span class="co">// Rückgabe von d</span></code></pre></div>
+</body>
+</html>
