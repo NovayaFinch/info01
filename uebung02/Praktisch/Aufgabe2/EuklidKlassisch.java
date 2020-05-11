@@ -7,26 +7,25 @@ public class EuklidKlassisch {
 	    System.out.println("nur positive Argumente!!");
 	    return; // Ende
 	}
-	
+
 	System.out.println("| line\t| x\t| y\t| comment");
 	// ggT(x,y)                                    // K1
 	System.out.println("| K1\t| "+x+"\t| "+y+"\t| ggT("+x+", "+y+")");
 	while ( y != 0 ) {                             // K2
-    	    System.out.println("| K2\t| "+x+"\t| "+y+"\t|  while("+y+" != 0)");
+      System.out.println("| K2\t| "+x+"\t| "+y+"\t|  while("+y+" != 0)");
+	    System.out.println("| K3\t| "+x+"\t| "+y+"\t|   if("+x+" > "+y+")");
 	    if ( x > y ) {                               // K3
-	        System.out.println("| K3\t| "+x+"\t| "+y+"\t|   if("+x+" > "+y+")");
-		x = x - y;                             // K4
-	  	System.out.println("| K4\t| "+x+"\t| "+y+"\t|    x = "+x+" - "+y);
+        x = x - y;                             // K4
+        System.out.println("| K4\t| "+x+"\t| "+y+"\t|    x = "+x+" - "+y);
 	    }
 	    else  {
-		y = y - x;                             // K5
-	  	System.out.println("| K5\t| "+x+"\t| "+y+"\t|    y = "+y+" - "+x);
+        System.out.println("| K5\t| "+x+"\t| "+y+"\t|    y = "+y+" - "+x);
+        y = y - x;                             // K5
 	    }
 	}
-	System.out.println("| K1\t| "+x+"\t| "+y+"\t| ggT("+x+", "+y+")");
-	//System.out.println(x);                         // K6
-	System.out.println("| K5\t| "+x+"\t| "+y+"\t| = "+x);
+  System.out.println("| K2\t| "+x+"\t| "+y+"\t|  while("+y+" != 0)");
+	System.out.println("| K6\t| "+x+"\t| "+y+"\t| = "+x);
 
 	return;
-    } 
+    }
 }
